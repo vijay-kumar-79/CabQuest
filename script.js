@@ -13,10 +13,10 @@ function toggleFilter() {
 
 let num = 15;
 
-function HandlePost(e) {
+function HandlePost() {
 	// e.preventDefault();
 	toggleHidePost();
-	let temp = allData[0];
+	let temp = { ...allData[0] };
 	temp.id = num++;
 	temp.name = document.getElementsByName("name")[0].value;
 	temp.destination = document.getElementsByName("destination")[0].value;
@@ -26,9 +26,11 @@ function HandlePost(e) {
 	temp.mobileNumber = document.getElementsByName("mobile")[0].value;
 	createCard(temp);
 	allData.push(temp);
+	console.log(allData);
 }
 
 function HandleFilter() {
+	// e.preventDefault();
 	toggleFilter();
 	let temp = { ...allData[0] };
 	// console.log(allData);
