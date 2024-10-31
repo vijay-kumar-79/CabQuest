@@ -11,6 +11,16 @@ function toggleFilter() {
 	if (document.getElementById("add-trip").classList[1] != 'hide') document.getElementById("add-trip").classList.toggle("hide");
 }
 
+function HandleUnfilter() {
+	let container = document.getElementById("container")
+	container.removeChild(document.getElementsByClassName("cards-container")[0]);
+	let cardContainer = document.createElement("div");
+	cardContainer.classList.add("cards-container");
+	container.appendChild(cardContainer);
+	Onload(allData);
+	document.getElementById("unfilter").classList.toggle("hide");
+}
+
 let num = 15;
 
 function HandlePost() {
@@ -32,6 +42,7 @@ function HandlePost() {
 function HandleFilter() {
 	// e.preventDefault();
 	toggleFilter();
+	if (document.getElementById("unfilter").classList[1] != 'hide') document.getElementById("unfilter").classList.remove("hide");
 	let temp = { ...allData[0] };
 	// console.log(allData);
 	// temp.id = num++;
@@ -42,15 +53,14 @@ function HandleFilter() {
 	temp.hostel = document.getElementsByName("hostel")[1].value;
 	temp.mobileNumber = document.getElementsByName("mobile")[1].value;
 	// console.log(allData)
-	allData = allData.filter((raju) => check(temp, raju));
-
-	console.log(allData)
+	let filtering = allData.filter((raju) => check(temp, raju));
+	// console.log(filtering)
 	let container = document.getElementById("container")
 	container.removeChild(document.getElementsByClassName("cards-container")[0]);
 	let cardContainer = document.createElement("div");
 	cardContainer.classList.add("cards-container");
 	container.appendChild(cardContainer);
-	Onload(allData);
+	Onload(filtering);
 }
 
 function check(temp, raju) {
@@ -96,25 +106,23 @@ function createCard(data) {
 let api = `https://krish-2512.github.io/cc-api/cc-api.json`;
 
 
-async function Onload() {
+async function Onload(array = allData) {
 	// console.log(allData);
-	if (allData.length === 0){
+	if (array.length === 0){
 	await
 		fetch(api)
 			.then(response => response.json())
 			.then(data => {
 				
-					allData = data.data
+					array = data.data
+					allData = array;
 				// console.log(data.data);
 			})
 			.catch(error => console.error('Error:', error));
 	// console.log(allData);
 	}
-	for (data of allData) {
+	for (data of array) {
 		// console.log(data);
 		createCard(data);
 	}
 }
-
-
-
