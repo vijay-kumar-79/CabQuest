@@ -12,10 +12,14 @@ body{
 	position: relative;
 }
 
-nav{
+.nav{
 	display: flex;
 	justify-content: space-between;
 	background-color: wheat;
+}
+
+.mobile-nav{
+	display: none;
 }
 
 .logo{
@@ -108,4 +112,32 @@ input{
 .hide {
 	display: none;
 	/* background-color: aqua; */
+}
+
+@media screen and (max-width: 950px) {
+	.card{
+		width: 80%;
+	}
+	.desktop-nav{
+		display: none;
+	}
+	.mobile-nav{
+		display: block;
+		position: relative;
+	}
+	svg{
+		width: 20px;
+		position: absolute;
+		top: 20px;
+		right: 20px;
+	}
+	.menu-links ul{
+		position: absolute;
+		right: 0px;
+		margin-right: 7px;
+		background-color: rgb(255, 248, 236);
+		border: 1px solid black;
+		/* display: none; */
+		flex-direction: column;
+	}
 }

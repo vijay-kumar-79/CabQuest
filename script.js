@@ -1,5 +1,13 @@
 let allData = [];
-window.onload = ()=>Onload(allData);
+window.onload = () => Onload(allData);
+
+function hideMenu() {
+	document.getElementById("menu-links").classList.toggle("hide");;
+}
+
+document.getElementsByTagName("svg")[0].addEventListener("click", () => {
+	hideMenu();
+})
 
 function toggleHidePost() {
 	document.getElementById("add-trip").classList.toggle("hide");
@@ -18,7 +26,15 @@ function HandleUnfilter() {
 	cardContainer.classList.add("cards-container");
 	container.appendChild(cardContainer);
 	Onload(allData);
-	document.getElementById("unfilter").classList.toggle("hide");
+	document.getElementsByClassName("unfilter")[0].classList.toggle("hide");
+	document.getElementsByClassName("unfilter")[1].classList.toggle("hide");
+}
+
+// document.getElementsByTagName("svg").onclick
+
+function HandleMenu() {
+	document.getElementsByTagName(ul)[1].style.display = "flex";
+	alert("hello")
 }
 
 let num = 15;
@@ -34,15 +50,31 @@ function HandlePost() {
 	temp.time = document.getElementsByName("time")[0].value;
 	temp.hostel = document.getElementsByName("hostel")[0].value;
 	temp.mobileNumber = document.getElementsByName("mobile")[0].value;
+	if(!checkProperties(temp)){
+		alert("Fill All Inputs");
+		return;
+	}
 	createCard(temp);
 	allData.push(temp);
 	console.log(allData);
 }
 
+function checkProperties(obj) {
+	for (var key in obj) {
+		if(key === "id") continue;
+		if (obj[key] == '') {
+			console.log(obj[key]);
+			return false;
+		}
+	}
+	return true;
+}
+
 function HandleFilter() {
 	// e.preventDefault();
 	toggleFilter();
-	if (document.getElementById("unfilter").classList[1] != 'hide') document.getElementById("unfilter").classList.remove("hide");
+	if (document.getElementsByClassName("unfilter")[0].classList.length != 1) document.getElementsByClassName("unfilter")[0].classList.remove("hide");
+	if (document.getElementsByClassName("unfilter")[1].classList.length != 1) document.getElementsByClassName("unfilter")[1].classList.remove("hide");
 	let temp = { ...allData[0] };
 	// console.log(allData);
 	// temp.id = num++;
@@ -54,7 +86,7 @@ function HandleFilter() {
 	temp.mobileNumber = document.getElementsByName("mobile")[1].value;
 	// console.log(allData)
 	let filtering = allData.filter((raju) => check(temp, raju));
-	// console.log(filtering)
+	console.log(filtering)
 	let container = document.getElementById("container")
 	container.removeChild(document.getElementsByClassName("cards-container")[0]);
 	let cardContainer = document.createElement("div");
@@ -108,18 +140,18 @@ let api = `https://krish-2512.github.io/cc-api/cc-api.json`;
 
 async function Onload(array = allData) {
 	// console.log(allData);
-	if (array.length === 0){
-	await
-		fetch(api)
-			.then(response => response.json())
-			.then(data => {
-				
+	if (array.length === 0) {
+		await
+			fetch(api)
+				.then(response => response.json())
+				.then(data => {
+
 					array = data.data
 					allData = array;
-				// console.log(data.data);
-			})
-			.catch(error => console.error('Error:', error));
-	// console.log(allData);
+					// console.log(data.data);
+				})
+				.catch(error => console.error('Error:', error));
+		// console.log(allData);
 	}
 	for (data of array) {
 		// console.log(data);
