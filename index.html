@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CabQuest</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<nav>
+		<p class="logo">CabQuest</p>
+		<ul>
+			<li>Home</li>
+			<li onclick="toggleHidePost()">New Request</li>
+			<li onclick="toggleFilter()">Filter</li>
+		</ul>
+	</nav>
+	<hr>
+	<div class="add-trip hide" id="add-trip">
+			<label for="name">Name</label>
+			<input type="text" name="name" id="name">
+			<label for="destination">Destination</label>
+			<input type="text" name="destination">
+			<label for="date">Date</label>
+			<input type="date" name="date">
+			<label for="time">Time</label>
+			<input type="time" name="time">
+			<label for="hostel">Hostel</label>
+			<input type="text" name="hostel">
+			<label for="mobile">Mobile</label>
+			<input type="number" name="mobile">
+			<button class="btn" onclick="HandlePost()">Post</button>	
+		
+	</div>
+	<div class="add-trip hide" id="filter">
+		<p style="font-weight: 500; font-size: large;">Filter Based on:</p>
+		<label for="name">Name</label>
+		<input type="text" name="name" id="name">
+		<label for="destination">Destination</label>
+		<input type="text" name="destination">
+		<label for="date">Date</label>
+		<input type="date" name="date">
+		<label for="time">Time</label>
+		<input type="time" name="time">
+		<label for="hostel">Hostel</label>
+		<input type="text" name="hostel">
+		<label for="mobile">Mobile</label>
+		<input type="number" name="mobile">
+		<button class="btn" onclick="HandleFilter()">Filter</button>
+	</div>
+	<div id="container">
+		<div class="cards-container">
+
+	</div>
+	</div>
+	
+	<hr>
+	<footer>
+		<p class="logo">CabQuest</p>
+		<p class="name">Made with love by Vijay</p>
+	</footer>
+
+</body>
+<script src="script.js"></script>
+
+</html>
